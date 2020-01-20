@@ -1,8 +1,8 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  pull_request:
+    types: [closed]
 
 jobs:
   build:
@@ -33,9 +33,9 @@ jobs:
       - run: git config user.email gh-actions-${GITHUB_ACTOR}@github.com
       - run: npm ci
       - run: npm version minor --force -m "Version %s"
-      - run: npm publish --access public
       - run: git remote add gh-origin https://${GITHUB_ACTOR}:${PUBLISH_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       - run: git push gh-origin HEAD:master --tags  
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
 
