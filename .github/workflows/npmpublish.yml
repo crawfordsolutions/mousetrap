@@ -41,8 +41,7 @@ jobs:
         registry-url: https://npm.pkg.github.com/
         scope: '@crawfordsolutions'
     - run: npm ci
-    #- run: echo registry=https://npm.pkg.github.com/crawfordsolutions >> .npmrc
-    - run: echo @crawfordsolutions:registry=https://npm.pkg.github.com/ >> .npmrc
+    - run: echo registry=https://npm.pkg.github.com/crawfordsolutions >> .npmrc
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
