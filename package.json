@@ -1,5 +1,6 @@
 {
   "name": "mousetrap-test",
+  "name": "@crawfordsolutions/actions",
   "version": "2.0.28",
   "description": "Simple library for handling keyboard shortcuts",
   "main": "mousetrap.js",
