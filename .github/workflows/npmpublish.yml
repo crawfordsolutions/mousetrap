@@ -33,9 +33,10 @@ jobs:
       - run: git config user.email gh-actions-${GITHUB_ACTOR}@github.com
       - run: npm ci
       - run: npm version minor --force -m "Version %s"
-      - run: git remote add gh-origin https://${GITHUB_ACTOR}:d662c2907f18f3622da4e2004bf639e24b7184fa@github.com/${GITHUB_REPOSITORY}.git
+      - run: git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       - run: git push gh-origin HEAD:master --tags  
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
