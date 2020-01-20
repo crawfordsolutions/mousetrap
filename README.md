@@ -100,3 +100,4 @@ Unit tests are run with <a href="https://mochajs.org/">mocha</a>.
 ## Documentation
 
 Full documentation can be found at https://craig.is/killing/mice
+
