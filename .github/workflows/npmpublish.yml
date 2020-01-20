@@ -42,6 +42,7 @@ jobs:
         scope: '@crawfordsolutions'
     - run: npm ci
     - run: echo registry=https://npm.pkg.github.com/crawfordsolutions >> .npmrc
+    - run: echo name=@crawfordsolutions/actions >> .npmrc
     #- run: echo strict-ssl=false >> .npmrc
     - run: npm publish
       env:
