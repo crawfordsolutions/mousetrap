@@ -30,36 +30,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 13
-        registry-url: https://npm.pkg.github.com/
-        scope: '@crawfordsolutions'
-    - run: git switch -c master
-    - run: git config user.email ""
-    - run: git config user.name "Publish Action"
-
-#      - name: Bump package.json version
-#        env:
-#          GITHUB_TOKEN: ${{secrets.PUGLISH_GITHUB_TOKEN}}
-#        run: |
-#          npm version patch
-#          git push "https://$GITHUB_ACTOR:$PUBLISH_GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
-
-#      - name: Publish
-#        env:
-#          # NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#          NODE_AUTH_TOKEN: ${{secrets.GPR_PAT}}
-#        run: npm publish
-        
-        
-    - run: npm ci
-    - run: echo registry=https://npm.pkg.github.com/crawfordsolutions >> .npmrc
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
