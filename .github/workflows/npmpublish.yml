@@ -30,10 +30,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
 
-publish-gpr:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
@@ -44,5 +44,3 @@ publish-gpr:
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{secrets.PUBLISH_GITHUB_TOKEN}}
-
-
