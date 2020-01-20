@@ -40,7 +40,6 @@ jobs:
         node-version: 13
         registry-url: https://npm.pkg.github.com/
         scope: '@crawfordsolutions'
-    - name: Setup GIT
     - run: git switch -c master
     - run: git config user.email ""
     - run: git config user.name "Publish Action"
