@@ -47,6 +47,7 @@ jobs:
           if [ "$LATEST" != "$CURRENT" ]
           then
             npm ci
+            echo @crawfordsolutions:registry=https://npm.pkg.github.com/ >> .npmrc
             npm publish
           fi
         env:
