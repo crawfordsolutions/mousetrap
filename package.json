@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git://github.com/crawfordsolutions/mousetrap.git"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/@OWNER"
+  },
   "keywords": [
     "keyboard",
     "shortcuts",
