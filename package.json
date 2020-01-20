@@ -1,6 +1,6 @@
 {
   "name": "mousetrap-test",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "Simple library for handling keyboard shortcuts",
   "main": "mousetrap.js",
   "directories": {
@@ -14,7 +14,7 @@
     "url": "git://github.com/crawfordsolutions/mousetrap.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/@OWNER"
+    "registry":"https://npm.pkg.github.com/@crawfordsolutions"
   },
   "keywords": [
     "keyboard",
