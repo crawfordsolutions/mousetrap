@@ -1,12 +1,9 @@
-name: Lint
+# workflow "Pull Request" {
+#   on = "pull_request"
+#   resolves = ["ESLint"]
+# }
 
-on: [push]
-
-jobs:
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: stefanoeb/eslint-action@1.0.2
-      - run: npm install eslint --save-dev 
-      - run: npm eslint --init
+# action "ESLint" {
+#   uses = "hallee/eslint-action@master"
+#   secrets = ["GITHUB_TOKEN"]
+# }
