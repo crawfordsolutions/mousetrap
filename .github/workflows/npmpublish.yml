@@ -17,31 +17,61 @@ jobs:
       - run: npm test
 
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        if: github.event.pull_request.merged
-        with:
-          node-version: 13
-          registry-url: https://registry.npmjs.org/
-          ref: refs/heads/master
-      - run: git config user.name $GITHUB_ACTOR
-      - run: git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-      - run: npm ci
-      - run: npm version minor --force -m "Version %s"
-      - run: git remote -v 
-      - run: git remote remove origin
-      #- run: git remote add origin git@github.com:user/repo.git  
-      - run: git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      - run: git add . 
-      - run: git commit -m "Push for PR."
-      - run: git push origin HEAD:master
+      name: Commit date to master
+      on: push
+      jobs:
+        date:
+          runs-on: ubuntu-latest
+          steps:
+            # Checkout the branch
+            - name: checkout
+              uses: actions/checkout@v2-beta # use either @v2-beta or @master. Eventually there will be a @v2 tag.
+            
+            - name: version bump
+              run: |
+                # do some operation that changes a file in the git repo
+                npm version minor --force -m "Version %s" 
+            - name: setup git config
+              run: |
+                # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+                git config user.name "GitHub Actions Bot"
+                git config user.email "<>"
+                
+            - name: commit
+              run: |
+                # Stage the file, commit and push
+                git add package.json
+                git commit -m "bumped version"
+                git push origin master
 
-#- run: git push -u https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git master --tags
-      #- run: git push https://${GITHUB_ACTOR}:password@myrepository.biz/file.git --all  git push origin HEAD:master --tags
+
+
+
+#   publish-npm:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-node@v1
+#         if: github.event.pull_request.merged
+#         with:
+#           node-version: 13
+#           registry-url: https://registry.npmjs.org/
+#           ref: refs/heads/master
+#       - run: git config user.name $GITHUB_ACTOR
+#       - run: git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+#       - run: npm ci
+#       - run: npm version minor --force -m "Version %s"
+#       - run: git remote -v 
+#       - run: git remote remove origin
+#       #- run: git remote add origin git@github.com:user/repo.git  
+#       - run: git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+#       - run: git add . 
+#       - run: git commit -m "Push for PR."
+#       - run: git push origin HEAD:master
+
+# #- run: git push -u https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git master --tags
+#       #- run: git push https://${GITHUB_ACTOR}:password@myrepository.biz/file.git --all  git push origin HEAD:master --tags
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
