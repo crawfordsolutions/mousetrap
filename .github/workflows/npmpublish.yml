@@ -1,8 +1,8 @@
 name: Node.js Package
 
-on:
-  pull_request:
-    types: [closed]
+# on:
+#   pull_request:
+#     types: [closed]
 
 jobs:
   build:
