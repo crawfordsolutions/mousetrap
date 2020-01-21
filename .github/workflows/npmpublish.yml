@@ -4,6 +4,8 @@ name: Node.js Package
 #   pull_request:
 #     types: [closed]
 
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,40 +15,22 @@ jobs:
         with:
           node-version: 13
       - run: npm ci
-      #- run: npm run lint
       - run: npm test
-
-
-      name: Commit date to master
-      on: push
-      jobs:
-        date:
-          runs-on: ubuntu-latest
-          steps:
-            # Checkout the branch
-            - name: checkout
-              uses: actions/checkout@v2-beta # use either @v2-beta or @master. Eventually there will be a @v2 tag.
-            
-            - name: version bump
-              run: |
-                # do some operation that changes a file in the git repo
-                npm version minor --force -m "Version %s" 
-            - name: setup git config
-              run: |
-                # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-                git config user.name "GitHub Actions Bot"
-                git config user.email "<>"
-                
-            - name: commit
-              run: |
-                # Stage the file, commit and push
-                git add package.json
-                git commit -m "bumped version"
-                git push origin master
-
-
-
-
+      publish-npm:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v1
+          - uses: actions/setup-node@v1
+            with:
+              node-version: 13
+              registry-url: https://registry.npmjs.org/
+          - run: npm ci
+          - run: npm publish
+          env:
+            NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
 #   publish-npm:
 #     needs: build
 #     runs-on: ubuntu-latest
@@ -72,8 +56,5 @@ jobs:
 
 # #- run: git push -u https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git master --tags
 #       #- run: git push https://${GITHUB_ACTOR}:password@myrepository.biz/file.git --all  git push origin HEAD:master --tags
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - run: npm publish --access public
 
