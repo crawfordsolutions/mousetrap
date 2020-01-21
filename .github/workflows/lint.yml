@@ -1,24 +1,23 @@
-name: Lint
+# name: Lint
 
-on: [push]
+# on: [push]
 
-jobs:
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: stefanoeb/eslint-action@1.0.2
-      - secrets: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - secrets: NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM_TOKEN}}
+# jobs:
+#   eslint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - uses: stefanoeb/eslint-action@1.0.2
 
 
 
-# workflow "Pull Request" {
-#   on = "pull_request"
-#   resolves = ["ESLint"]
-# }
 
-# action "ESLint" {
-#   uses = "hallee/eslint-action@master"
-#   secrets = ["GITHUB_TOKEN"]
-# }
+workflow "Pull Request" {
+  on = "pull_request"
+  resolves = ["ESLint"]
+}
+
+action "ESLint" {
+  uses = "hallee/eslint-action@master"
+  secrets = ["GITHUB_TOKEN"]
+}
