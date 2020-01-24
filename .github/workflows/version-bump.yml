@@ -11,6 +11,8 @@ jobs:
       - name: version bump
         run: |
           # do some operation that changes a file in the git repo
+          git config --global user.email "59573004+crawfordsolutions@users.noreply.github.com"
+          git config --global user.name "Jeff C"
           npm version minor --force -m "Version %s" 
       - name: setup git config
         run: |
