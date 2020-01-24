@@ -13,16 +13,18 @@ jobs:
           # do some operation that changes a file in the git repo
           git config --global user.email "59573004+crawfordsolutions@users.noreply.github.com"
           git config --global user.name "Jeff C"
-          npm version minor --force -m "Version %s" 
+          #npm version minor --force -m "Version %s" 
+          npm version 
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          #git config user.name "GitHub Actions Bot"
+          #git config user.email "<>"
           
       - name: commit
         run: |
           # Stage the file, commit and push
-          git add package.json
-          git commit -m "bumped version"
-          git push origin master
+          #git add package.json
+          #git commit -m "bumped version"
+          #git push origin master
+         
