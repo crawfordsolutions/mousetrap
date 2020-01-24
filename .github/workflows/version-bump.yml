@@ -14,7 +14,7 @@ jobs:
           git config --global user.email "59573004+crawfordsolutions@users.noreply.github.com"
           git config --global user.name "Jeff C"
           #npm version minor --force -m "Version %s" 
-          npm version 
+          npm version patch -m "Upgrade to %s for reasons"
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
