@@ -22,6 +22,7 @@ jobs:
         npm ci
         npm run build --if-present
         npm test
+        npm install nodemon --save-dev
         npm install nodeunit jscoverage codecov --save-dev
         npm run codecov
       env:
