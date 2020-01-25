@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "nodeunit tests",
+    "test": "mocha --reporter=nyan tests/test.mousetrap.js",
     "codecov": "jscoverage lib && YOURPACKAGE_COVERAGE=1 nodeunit --reporter=lcov test && codecov",
     "preversion": "npm test",
     "version": "npm run build && git add -A dist",
