@@ -22,7 +22,6 @@ jobs:
         npm cache clean --force
         npm install nodemon --save-dev
         npm install nodeunit jscoverage codecov --save-dev
-        npm install -g mocha
         npm set audit false
         npm ci
         npm run build --if-present
