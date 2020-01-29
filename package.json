@@ -1,6 +1,6 @@
 {
   "name": "mousetrap-test",
-  "version": "2.1.35",
+  "version": "2.1.36",
   "description": "Simple library for handling keyboard shortcuts",
   "main": "mousetrap.js",
   "directories": {
